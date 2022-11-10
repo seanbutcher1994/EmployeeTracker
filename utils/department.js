@@ -1,5 +1,5 @@
 // view department function
-function viewDepartment(){
+function getDepartment(){
 
 }
 // create department function
@@ -9,5 +9,5 @@ function createDepartment(name){
 
 module.exports = {
     createDepartment,
-    viewDepartment,
+    getDepartment,
 }
