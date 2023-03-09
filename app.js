@@ -1,5 +1,6 @@
 const inquirer = require("inquirer");
 const {getDepartment, createDepartment} = require("./utils/department");
+const { getRoles, createRoles } = require("./utils/roles");
 
 function askQuestion(){
 
@@ -26,16 +27,35 @@ function askQuestion(){
             when: function (ans){
                 return ans.operation === 'create a department';
             }
+        },
+        {
+            message: 'what is the roles title',
+            name: 'role_title',
+            type: 'input',
+            when: function (ans){
+                return ans.operation === 'create a role';
+            }
+        },
+        {
+            messahe: 'what is the roles salary',
+            name: 'role_salary',
+            type: 'input',
+            when: function (ans){
+                return ans.role_title;
+            }
         }
-    ]).then( async (res) => {
+    ]).then(async (res) => {
 
         if(res.operation === 'view all departments'){
-           await getDepartments()
+           const departments = await getDepartment();
+           console.table(departments);
         } else if (res.operation === 'create a department'){
             await createDepartment(res.department_name)
         } else if (res.operation === 'view all roles'){
 
         } else if (res.operation === 'create a role'){
+            await createRoles(res.role_title, res.role_salary)
+
 
         } else if (res.operation === 'view all employees'){
 
